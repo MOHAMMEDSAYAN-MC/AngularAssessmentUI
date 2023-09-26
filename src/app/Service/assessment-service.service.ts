@@ -20,10 +20,10 @@ export class AssessmentServiceService {
   }
 
   policyNumberValidate(policynumber:number):Observable<boolean>{
-    return this.http.get<boolean>(this.baseApiUrl+'/api/User/validatePolicy?policynumber='+policynumber);
+    return this.http.get<boolean>(this.baseApiUrl+'/api/User/validatePolicy/'+policynumber);
   }
   chasisNumberValidate(chasisnumber:string):Observable<boolean>{
-    return this.http.get<boolean>(this.baseApiUrl+'/api/User/validateChasis?chasisnumber='+chasisnumber);
+    return this.http.get<boolean>(this.baseApiUrl+'/api/User/validateChasis/'+chasisnumber);
 
   }
   addUserPolicyDetails(username:string,policynumber:number){
@@ -39,10 +39,10 @@ export class AssessmentServiceService {
   }
 
   fetchInsuredDetails(policyNumber:number):Observable<any>{
-    return this.http.get<any>(this.baseApiUrl+'/api/User/InsuredDetails?policynumber='+policyNumber);
+    return this.http.get<any>(this.baseApiUrl+'/api/User/InsuredDetails/'+policyNumber);
   }
   deleteuserpolicy(selectedPolicyNumber:number):Observable<any>{
-    return this.http.delete<any>(this.baseApiUrl+'/api/User?policynumber='+selectedPolicyNumber);
+    return this.http.delete<any>(this.baseApiUrl+'/api/User/'+selectedPolicyNumber);
   }
 
   setUserName(username:string){
