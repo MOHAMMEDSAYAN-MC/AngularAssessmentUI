@@ -31,7 +31,7 @@ export class AssessmentServiceService {
       username:username,
       policyNumber:policynumber
     };
-    return this.http.post<any>(this.baseApiUrl+'/api/User/add',data);
+    return this.http.post<boolean>(this.baseApiUrl+'/api/User/add',data);
   }
 
   fetchpolicynumbers():Observable<any>{
@@ -41,8 +41,8 @@ export class AssessmentServiceService {
   fetchInsuredDetails(policyNumber:number):Observable<any>{
     return this.http.get<any>(this.baseApiUrl+'/api/User/InsuredDetails/'+policyNumber);
   }
-  deleteuserpolicy(selectedPolicyNumber:number):Observable<any>{
-    return this.http.delete<any>(this.baseApiUrl+'/api/User/'+selectedPolicyNumber);
+  deleteuserpolicy(selectedPolicyNumber:number):Observable<boolean>{
+    return this.http.delete<boolean>(this.baseApiUrl+'/api/User/'+selectedPolicyNumber);
   }
 
   setUserName(username:string){
