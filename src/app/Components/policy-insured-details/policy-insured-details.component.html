@@ -43,8 +43,8 @@
 
 
     <div class="row mt-5 mx-5" *ngIf="selectedPolicyNumber">
-        <div class="accordion mt-4" id="accordionFlushExample" >
-            <div class="accordion-item border-4">
+        <div class="accordion mt-4" id="accordionFlushExample" *ngIf="insuredDetails" >
+            <div class="accordion-item border-4" >
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                     Personal Information:
@@ -85,7 +85,7 @@
                                     </div>
                                   </div>
                                   <hr>
-                                  <div class="row">
+                                  <div class="row" >
                                     <div class="col-sm-3">
                                       <p class="mb-0">License Number</p>
                                     </div>

@@ -131,17 +131,18 @@ userId:string='';
 
   }
   deleteUserPolicy(){
-    this.service.deleteUserPolicy(this.userId,this.selectedPolicyNumber).subscribe((res)=>{
-      if(res){
-        alert("Successfully Deleted");
-        this.selectedPolicyNumber=null;
-        this.fetchPolicyNumbers();
-
-      }
-
-    },(error)=>{
-      console.log("Error when deleting policy numbers");
-  });
+    const confirmation=confirm('Do yo want to Delete?');
+    if(confirmation){
+      this.service.deleteUserPolicy(this.userId,this.selectedPolicyNumber).subscribe((res)=>{
+        if(res){
+          alert("Successfully Deleted");
+          this.selectedPolicyNumber=null;
+          this.fetchPolicyNumbers();
+        }
+      },(error)=>{
+          console.log("Error when deleting policy numbers");
+        }
+    );
   }
-
+  }
 }
