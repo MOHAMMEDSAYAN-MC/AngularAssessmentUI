@@ -7,11 +7,13 @@ import { LoginComponent } from './Components/login/login.component';
 import { PolicyInsuredDetailsComponent } from './Components/policy-insured-details/policy-insured-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './Components/header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    PolicyInsuredDetailsComponent
+    PolicyInsuredDetailsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

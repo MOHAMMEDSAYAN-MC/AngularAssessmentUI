@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/Model/user';
-import { AssessmentServiceService } from 'src/app/Service/assessment-service.service';
+import { CustomerPortalService } from 'src/app/Service/customer-portal.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit{
     passWord:''
   };
 
-  constructor(private service:AssessmentServiceService,private router:Router){}
+  constructor(private service:CustomerPortalService,private router:Router){}
   ngOnInit(): void {
     
   }
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit{
   Login(){
     this.service.login(this.user).subscribe((res)=>{
       if(res){
-        console.log(res);
+
         localStorage.setItem('token',Math.random().toString());
         this.router.navigate(['/PolicyInsuredDetails']);
         this.service.setUserName(this.user.userName);

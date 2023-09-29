@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InsuredDetails } from 'src/app/Model/InsuredDetails';
-import { AssessmentServiceService } from 'src/app/Service/assessment-service.service';
+import { CustomerPortalService } from 'src/app/Service/customer-portal.service';
 
 @Component({
   selector: 'app-policy-insured-details',
@@ -37,13 +37,27 @@ insuredDetails:InsuredDetails={
   bankAddress:null  
 };
 
+userId:string='';
 
-  constructor(private service:AssessmentServiceService){}
+
+  constructor(private service:CustomerPortalService){}
   ngOnInit(): void {
-        this.userName=this.service.getUserName();
-        console.log(this.userName);
-        this.fetchPolicyNumbers();
+        this.getUserIdFromApi();
+        
   }
+
+
+  getUserIdFromApi(){
+    this.service.getUserIdFromApi().subscribe((id) => {
+      this.userId = id;
+      this.fetchPolicyNumbers();
+    },(error)=>{
+      console.log("Error when fetching userId");
+    }
+    );
+  }
+  
+  
 
   OnSubmit(){
     this.service.policyNumberValidate(this.policyNumber).subscribe(
@@ -52,10 +66,15 @@ insuredDetails:InsuredDetails={
           this.service.chasisNumberValidate(this.chasisNumber).subscribe(
             (response)=>{
               if(response){
-                this.service.addUserPolicyDetails(this.userName,this.policyNumber).subscribe(
+                this.service.addUserPolicyDetails(this.userId,this.policyNumber).subscribe(
                   (result)=>{
+                    if(result){
+                      alert("Successfully Added");
+                    }
+                    else{
+                      alert("Policy number Already added");
+                    }
                     
-                    alert("Successfully Added");
                   
                     this.fetchPolicyNumbers();
                   },(error)=>{
@@ -82,9 +101,17 @@ insuredDetails:InsuredDetails={
   }
 
   fetchPolicyNumbers(){
-    this.service.fetchpolicynumbers().subscribe(
+    this.service.fetchPolicyNumbers(this.userId).subscribe(
       (res)=>{
+        if(res){
           this.policy_Numbers=res;
+        }
+        else
+        {
+          this.policy_Numbers=[];
+        }
+       
+          
       },
       (error)=>{
           console.log("Error when fetching policy numbers",error);
@@ -104,12 +131,12 @@ insuredDetails:InsuredDetails={
 
   }
   deleteUserPolicy(){
-    this.service.deleteuserpolicy(this.selectedPolicyNumber).subscribe((res)=>{
+    this.service.deleteUserPolicy(this.userId,this.selectedPolicyNumber).subscribe((res)=>{
       if(res){
         alert("Successfully Deleted");
         this.selectedPolicyNumber=null;
         this.fetchPolicyNumbers();
-        console.log(res);
+
       }
 
     },(error)=>{

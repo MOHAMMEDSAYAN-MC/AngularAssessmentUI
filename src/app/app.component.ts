@@ -8,21 +8,5 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'AssessmentUI';
-  constructor(private router:Router){}
-
-  isHomePage(): boolean {
-    return this.router.url === '/';
-  }
-  isPolicyInsuredDetailsPage(): boolean {
-    return this.router.url === '/PolicyInsuredDetails';
-  }
-
-  logout(){
-    const confirmation=confirm('Do yo wnat to logout');
-    if(confirmation){
-      localStorage.removeItem('token');
-      this.router.navigate(['/Login']);
-    }
-        
-  }
+  
 }
